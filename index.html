@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>全选、反选</title>
+<meta charset="UTF-8" />
+<link rel="stylesheet" type="text/css" href="./style.css"/>
+<script src="./jquery-1.7.2.min.js"></script>
+<style>
+	li{
+		list-style:none;
+	}
+</style>
+</head>
+<html>
+
+	<form>
+		<ul id="list">
+			<li><label><input type="checkbox" name="" value="" /></label>1</li>
+			<li><label><input type="checkbox" name="" value="" /></label>2</li>
+			<li><label><input type="checkbox" name="" value="" /></label>3</li>
+			<li><label><input type="checkbox" name="" value="" /></label>4</li>
+			<li><label><input type="checkbox" name="" value="" /></label>5</li>
+			<li><label><input type="checkbox" name="" value="" /></label>6</li>
+			<li><label><input type="checkbox" name="" value="" /></label>7</li>
+			<li><label><input type="checkbox" name="" value="" /></label>8</li>
+			<li><label><input type="checkbox" name="" value="" /></label>9</li>
+			<li><label><input type="checkbox" name="" value="" /></label>10</li>
+		</ul>
+		<input type="checkbox" id="selectAll" />全选
+		<input type="checkbox" id="selectNone" />清空（全不选）
+		<input type="checkbox" id="selectReverse" />反选
+	</form>
+
+</html>
+<script>
+$(function(){
+	//全选
+	$("#selectAll").click(function(){
+		if(this.checked){
+			$("#list :checkbox").prop("checked",true);
+			$("#selectNone,#selectReverse").prop("checked",false);
+		}else{
+			$("#list :checkbox").prop("checked",false);
+		}
+	})
+	
+	//全不选（全不选）
+	$("#selectNone").click(function(){
+		if(this.checked){
+			$("#list :checkbox").prop("checked",false);
+			$("#selectAll,#selectReverse").prop("checked",false);
+		}
+	})
+	
+	//反选
+	$("#selectReverse").click(function(){
+		if(this.checked){	//此处this代指#select
+			$("#list :checkbox").each(function(){
+				//此处this代指#list :checked
+				$(this).prop("checked",!$(this).prop("checked"));
+			});
+			$("#selectAll,#selectNone").prop("checked",false);
+		}
+	})
+})
+</script>
